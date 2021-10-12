@@ -10,12 +10,12 @@
     "css:check": "npx stylelint **/*.css",
     "css:fix": "npx stylelint **/*.css --fix",
     "prettier:check": "npx prettier --check .",
-    "prettier:fix": "npx prettier --write .",
+    "prettier:fix": "npx prettier --ignore-unknown --write .",
     "prepare": "husky install"
   },
   "lint-staged": {
     "**/*.css": "npm run css:fix",
-    "**/*": "prettier --write --ignore-unknown ."
+    "**/*": "npm run prettier:fix"
   },
   "author": "",
   "license": "ISC",
