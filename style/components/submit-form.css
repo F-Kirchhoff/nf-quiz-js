@@ -40,6 +40,7 @@
   background-color: var(--c-secondary);
   color: var(--c-light);
   border: none;
+  text-align: center;
   border-radius: 5px;
   font-size: 1.1rem;
   font-weight: bold;

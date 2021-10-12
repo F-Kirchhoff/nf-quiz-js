@@ -17,8 +17,8 @@
     <header class="zz-top title">
       <h1 class="text-gradient-primary">Quizzzle</h1>
     </header>
-
-    <main>
+    <!-- HOME-CONTENT  -->
+    <main id="HOME" class="js-content">
       <ul class="card-container" role="list">
         <li class="card q-card">
           <div class="q-card__q-container">
@@ -227,34 +227,154 @@
         </li>
       </ul>
     </main>
+    <!-- BOOKMARKS-CONTENT  -->
+    <main id="BOOKMARKS" class="js-content hidden">
+      <ul class="card-container" role="list">
+        <li class="card q-card">
+          <div class="q-card__q-container">
+            <h2 class="q-card__title text-primary">Question</h2>
+            <p class="q-card__q-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam,
+              excepturi?
+            </p>
+          </div>
+
+          <input class="hidden q-card__btn-ceckbox" type="checkbox" id="q1" />
+          <label class="q-card__btn bg-gradient-secondary" for="q1">
+            <span class="q-card__btn-text q-card__btn-text--show">
+              show answer
+            </span>
+            <span class="q-card__btn-text q-card__btn-text--hide">
+              hide answer
+            </span>
+          </label>
+          <div class="q-card__answer-container">
+            <h2 class="q-card__title text-secondary">Answer</h2>
+            <p class="q-card__a-text bg-gradient-secondary">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae illo
+              expedita ipsum sit suscipit consequatur.
+            </p>
+          </div>
+
+          <ul class="tag-list">
+            <li class="tag-list__item">lorem</li>
+            <li class="tag-list__item">ipsum</li>
+            <li class="tag-list__item">sit</li>
+            <li class="tag-list__item">dolor</li>
+          </ul>
+
+          <div class="bookmark">
+            <input checked class="hidden" type="checkbox" id="q1b" />
+            <label class="bookmark__btn" for="q1b">
+              <i class="bookmark__btn--empty far fa-bookmark"></i>
+              <i class="bookmark__btn--filled fas fa-bookmark"></i>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </main>
+    <!-- CREATE-CONTENT  -->
+    <main id="CREATE" class="js-content xcentered hidden">
+      <span class="sr-only" id="form-label">Create a new Question</span>
+      <form aria-labelledby="form-label" action="" class="submit-form">
+        <label class="text-lg text-primary" for="question-field"
+          >Question</label
+        >
+        <textarea
+          class="submit-form__input submit-form__input--question"
+          name="question"
+          id="question-field"
+          placeholder="Write your question here..."
+        ></textarea>
+        <label class="text-lg text-secondary" for="answer-field">Answer</label>
+        <textarea
+          class="submit-form__input submit-form__input--answer"
+          name="answer"
+          id="answer-field"
+          placeholder="Write your answer here..."
+        ></textarea>
+        <label class="text-lg text-dark" for="tags-field">Tags</label>
+        <input
+          type="text"
+          class="submit-form__input submit-form__input--tags"
+          name="tags"
+          id="tags-field"
+          placeholder="tags..."
+        />
+        <button class="submit-form__btn bg-gradient-secondary">
+          Submit Question
+        </button>
+      </form>
+    </main>
+    <!-- PROFILE-CONTENT  -->
+    <main id="PROFILE" class="js-content xcentered hidden">
+      <div class="card profile-card">
+        <img
+          class="profile-card__img"
+          src="https://source.unsplash.com/random/300x300?portrait"
+          alt=""
+          height="200"
+          width="200"
+        />
+        <h2 class="profile-card__name">John Doe</h2>
+        <p class="profile-card__description">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt
+          adipisci laborum voluptatum, quo ipsa voluptates temporibus ullam
+          mollitia cupiditate illum odit at velit, nobis suscipit nam!
+          Praesentium, accusamus sed maiores veritatis nulla consequatur,
+          repellendus ex, recusandae expedita quod facere nisi.
+        </p>
+        <h3 class="profile-card__skill-header">Skills</h3>
+        <ul class="tag-list">
+          <li class="tag-list__item">HTML</li>
+          <li class="tag-list__item">CSS</li>
+          <li class="tag-list__item">React</li>
+          <li class="tag-list__item">Design</li>
+        </ul>
+        <a class="profile-card__logout-btn" href="#tologoutpage">logout</a>
+      </div>
+    </main>
 
     <nav class="zz-top">
       <dl class="menu">
-        <a class="menu__item menu__item--active" href="index.html">
+        <button
+          class="js-nav-btn menu__item menu__item--active"
+          href="index.html"
+          value="HOME"
+        >
           <dt class="sr-only">home</dt>
           <dd class="">
             <i class="fas fa-home"></i>
           </dd>
-        </a>
-        <a class="menu__item" href="bookmarks.html">
+        </button>
+        <button
+          class="js-nav-btn menu__item"
+          href="bookmarks.html"
+          value="BOOKMARKS"
+        >
           <dt class="sr-only">bookmarks</dt>
           <dd>
             <i class="fas fa-bookmark"></i>
           </dd>
-        </a>
-        <a class="menu__item" href="create.html">
+        </button>
+        <button class="js-nav-btn menu__item" href="create.html" value="CREATE">
           <dt class="sr-only">create</dt>
           <dd>
             <i class="fas fa-plus"></i>
           </dd>
-        </a>
-        <a class="menu__item" href="profile.html">
+        </button>
+        <button
+          class="js-nav-btn menu__item"
+          href="profile.html"
+          value="PROFILE"
+        >
           <dt class="sr-only">profile</dt>
           <dd>
             <i class="fas fa-user-circle"></i>
           </dd>
-        </a>
+        </button>
       </dl>
     </nav>
+    <script src="index.js"></script>
   </body>
 </html>
