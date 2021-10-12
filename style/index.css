@@ -1,15 +1,15 @@
-@import "reset.css";
-@import "theme.css";
-@import "base.css";
-@import "utility.css";
+@import 'reset.css';
+@import 'theme.css';
+@import 'base.css';
+@import 'utility.css';
 
-@import "components/title.css";
-@import "components/navbar.css";
-@import "components/card.css";
-@import "components/q-card.css";
-@import "components/profile-card.css";
-@import "components/tag-list.css";
-@import "components/bookmark.css";
-@import "components/submit-form.css";
+@import 'components/title.css';
+@import 'components/navbar.css';
+@import 'components/card.css';
+@import 'components/q-card.css';
+@import 'components/profile-card.css';
+@import 'components/tag-list.css';
+@import 'components/bookmark.css';
+@import 'components/submit-form.css';
 
-@import "style.css";
+@import 'style.css';

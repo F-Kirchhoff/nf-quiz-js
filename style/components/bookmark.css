@@ -17,13 +17,13 @@
 }
 
 .bookmark
-  input[type="checkbox"]:checked
+  input[type='checkbox']:checked
   ~ .bookmark__btn
   .bookmark__btn--empty {
   display: none;
 }
 .bookmark
-  input[type="checkbox"]:checked
+  input[type='checkbox']:checked
   ~ .bookmark__btn
   .bookmark__btn--filled {
   display: block;

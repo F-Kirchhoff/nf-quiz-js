@@ -19,9 +19,11 @@
     </header>
 
     <main class="centered">
-      <span class="sr-only" id = 'form-label'>Create a new Question</span>
+      <span class="sr-only" id="form-label">Create a new Question</span>
       <form aria-labelledby="form-label" action="" class="submit-form">
-        <label class="text-lg text-primary" for="question-field">Question</label>
+        <label class="text-lg text-primary" for="question-field"
+          >Question</label
+        >
         <textarea
           class="submit-form__input submit-form__input--question"
           name="question"
@@ -36,13 +38,16 @@
           placeholder="Write your answer here..."
         ></textarea>
         <label class="text-lg text-dark" for="tags-field">Tags</label>
-        <input type="text"
+        <input
+          type="text"
           class="submit-form__input submit-form__input--tags"
           name="tags"
           id="tags-field"
           placeholder="tags..."
-        ></input>
-        <button class="submit-form__btn bg-gradient-secondary">Submit Question</button>
+        />
+        <button class="submit-form__btn bg-gradient-secondary">
+          Submit Question
+        </button>
       </form>
     </main>
 

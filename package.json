@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "name": "void",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run html:check && npm run css:check && npm run prettier:check",
+    "html:check": "npx htmlhint **/*.html",
+    "css:check": "npx stylelint **/*.css",
+    "css:fix": "npx stylelint **/*.css --fix",
+    "prettier:check": "npx prettier --check .",
+    "prettier:fix": "npx prettier --write .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.css": "npm run css:fix",
+    "**/*": "prettier --write --ignore-unknown ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "htmlhint": "^0.15.2",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0"
+  }
+}

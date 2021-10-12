@@ -38,7 +38,7 @@
   transform: scale(1.06);
 }
 
-/* BUTTON LOGIC START*/
+/* BUTTON LOGIC START */
 
 .q-card__btn-text--show {
   display: block;
@@ -51,16 +51,16 @@
 }
 
 .q-card
-  input[type="checkbox"].q-card__btn-ceckbox:checked
+  input[type='checkbox'].q-card__btn-ceckbox:checked
   ~ .q-card__answer-container,
 .q-card
-  input[type="checkbox"].q-card__btn-ceckbox:checked
+  input[type='checkbox'].q-card__btn-ceckbox:checked
   ~ .q-card__btn
   > .q-card__btn-text--hide {
   display: block;
 }
 .q-card
-  input[type="checkbox"].q-card__btn-ceckbox:checked
+  input[type='checkbox'].q-card__btn-ceckbox:checked
   ~ .q-card__btn
   > .q-card__btn-text--show {
   display: none;
