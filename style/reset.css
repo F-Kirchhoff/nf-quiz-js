@@ -1,0 +1,22 @@
+ul,
+h1,
+h2,
+h3,
+dl,
+dd,
+a,
+dt {
+  all: unset;
+}
+
+* {
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}

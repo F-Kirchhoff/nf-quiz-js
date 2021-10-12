@@ -1,0 +1,49 @@
+.profile-card {
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  max-width: 420px;
+}
+
+.profile-card__img {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.profile-card__name {
+  color: var(--c-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  justify-self: center;
+  align-self: center;
+}
+
+.profile-card__description,
+.profile-card__skill-header,
+.tag-list,
+.profile-card__logout-btn {
+  grid-column: 1/ -1;
+}
+
+.profile-card__description {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.profile-card__skill-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--c-dark);
+}
+
+.profile-card__logout-btn {
+  display: block;
+  justify-self: center;
+  font-weight: bold;
+  padding: 10px 18px;
+  color: rgb(250, 7, 68);
+  border-radius: 10px;
+  border: solid 3px;
+}

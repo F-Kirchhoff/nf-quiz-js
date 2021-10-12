@@ -1,0 +1,30 @@
+.bookmark {
+  position: absolute;
+  top: -5px;
+  right: 8px;
+  font-size: 35px;
+  color: var(--c-secondary);
+}
+
+.bookmark__btn .bookmark__btn--filled {
+  display: none;
+  cursor: pointer;
+}
+
+.bookmark__btn .bookmark__btn--empty {
+  display: block;
+  cursor: pointer;
+}
+
+.bookmark
+  input[type="checkbox"]:checked
+  ~ .bookmark__btn
+  .bookmark__btn--empty {
+  display: none;
+}
+.bookmark
+  input[type="checkbox"]:checked
+  ~ .bookmark__btn
+  .bookmark__btn--filled {
+  display: block;
+}

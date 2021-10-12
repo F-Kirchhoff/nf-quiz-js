@@ -1,0 +1,11 @@
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  color: var(--c-primary);
+  background-color: var(--c-light);
+  font-weight: 900;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0 -3px 0 inset;
+}

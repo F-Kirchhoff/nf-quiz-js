@@ -1,0 +1,15 @@
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.tag-list__item {
+  padding: 5px 8px;
+  border: solid 3px;
+  border-radius: 999px;
+  color: var(--c-dark);
+  font-weight: bold;
+}

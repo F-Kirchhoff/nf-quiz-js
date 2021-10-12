@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+    <title>Quizzzle</title>
+  </head>
+  <body>
+    <header class="zz-top title">
+      <h1 class="text-gradient-primary">Create</h1>
+    </header>
+
+    <main class="centered">
+      <span class="sr-only" id = 'form-label'>Create a new Question</span>
+      <form aria-labelledby="form-label" action="" class="submit-form">
+        <label class="text-lg text-primary" for="question-field">Question</label>
+        <textarea
+          class="submit-form__input submit-form__input--question"
+          name="question"
+          id="question-field"
+          placeholder="Write your question here..."
+        ></textarea>
+        <label class="text-lg text-secondary" for="answer-field">Answer</label>
+        <textarea
+          class="submit-form__input submit-form__input--answer"
+          name="answer"
+          id="answer-field"
+          placeholder="Write your answer here..."
+        ></textarea>
+        <label class="text-lg text-dark" for="tags-field">Tags</label>
+        <input type="text"
+          class="submit-form__input submit-form__input--tags"
+          name="tags"
+          id="tags-field"
+          placeholder="tags..."
+        ></input>
+        <button class="submit-form__btn bg-gradient-secondary">Submit Question</button>
+      </form>
+    </main>
+
+    <nav class="zz-top">
+      <dl class="menu">
+        <a class="menu__item" href="index.html">
+          <dt class="sr-only">home</dt>
+          <dd class="">
+            <i class="fas fa-home"></i>
+          </dd>
+        </a>
+        <a class="menu__item" href="bookmarks.html">
+          <dt class="sr-only">bookmarks</dt>
+          <dd>
+            <i class="fas fa-bookmark"></i>
+          </dd>
+        </a>
+        <a class="menu__item menu__item--active" href="create.html">
+          <dt class="sr-only">create</dt>
+          <dd>
+            <i class="fas fa-plus"></i>
+          </dd>
+        </a>
+        <a class="menu__item" href="profile.html">
+          <dt class="sr-only">profile</dt>
+          <dd>
+            <i class="fas fa-user-circle"></i>
+          </dd>
+        </a>
+      </dl>
+    </nav>
+  </body>
+</html>
