@@ -92,13 +92,13 @@ function resetAllNavBtns() {
   })
 }
 
+// creates a question card as a dom element
 function createQuestionCard(questionObj) {
   const { _id, question, answer, tags } = questionObj
 
   const newCard = document.createElement('li')
   newCard.classList.add('card', 'q-card')
   newCard.id = `questioncard_${_id}`
-  console.log(newCard)
 
   newCard.innerHTML = `      
     <div class="q-card__q-container">
@@ -107,7 +107,6 @@ function createQuestionCard(questionObj) {
         ${question}
       </p>
     </div>
-
     <button class="js-answer-btn q-card__btn bg-gradient-secondary">
       <span class="js-show-text q-card__btn-text"> show answer </span>
       <span class="js-hide-text q-card__btn-text hidden">
@@ -120,10 +119,8 @@ function createQuestionCard(questionObj) {
         ${answer}
       </p>
     </div>
-
     <ul class="tag-list">
     </ul>
-
     <button class="js-bookmark-btn bookmark">
       <i class="js-bookmark bookmark__btn--empty far fa-bookmark"></i>
     </button>
@@ -135,6 +132,12 @@ function createQuestionCard(questionObj) {
   const btnTxtHide = newCard.querySelector('.js-hide-text')
   const answerContainer = newCard.querySelector('.js-answer-container')
   const bookmark = newCard.querySelector('.js-bookmark')
+
+  // populate tag list
+  tags.forEach(tag => {
+    const newTag = createTag(tag)
+    tagList.appendChild(newTag)
+  })
 
   // add answer toggle
   answerBtn.addEventListener('click', _ => {
@@ -150,4 +153,13 @@ function createQuestionCard(questionObj) {
   })
 
   return newCard
+}
+
+// creates a tag for tag-list as a dom element
+function createTag(tag) {
+  const newTag = document.createElement('li')
+  newTag.classList.add('tag-list__item')
+  newTag.innerText = tag
+
+  return newTag
 }
