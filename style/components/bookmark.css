@@ -4,6 +4,7 @@
   right: 8px;
   font-size: 35px;
   color: var(--c-secondary);
+  cursor: pointer;
 }
 
 .bookmark__btn .bookmark__btn--filled {
