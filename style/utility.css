@@ -58,6 +58,10 @@
   align-items: center;
 }
 
+.wv-full {
+  width: 100vw;
+}
+
 .bg-gradient-primary {
   background-image: linear-gradient(
     160deg,
@@ -99,8 +103,4 @@
 
 .hidden {
   display: none;
-}
-
-.show {
-  display: block;
 }
