@@ -4,6 +4,8 @@ const pageList = [...document.querySelectorAll('.js-content')]
 const cardContainer = document.querySelector('.js-card-container')
 const bookmarksContainer = document.querySelector('.js-bookmarks-container')
 
+const createForm = document.querySelector('[data-js=create-form]')
+
 let questionDB = [
   {
     _id: 1,
@@ -64,6 +66,29 @@ navBtnList.forEach(btn => {
     // Apply active styling to button
     btn.classList.add('menu__item--active')
   })
+})
+
+// add functionality of the create page
+createForm.addEventListener('submit', event => {
+  event.preventDefault()
+  const { question, answer, tags } = createForm.elements
+
+  const tagList = tags.value.split(',')
+
+  const newQuestionObj = {
+    _id: new Date().getTime(),
+    question: question.value,
+    answer: answer.value,
+    tags: tagList,
+    saved: false,
+  }
+
+  question.value = ''
+  answer.value = ''
+  tags.value = ''
+
+  setQuestionDB([newQuestionObj, ...questionDB])
+  renderHomePage()
 })
 
 function displayPageById(id) {
@@ -198,9 +223,15 @@ function handleBookmarkClick(id) {
   })
 
   // update the DB
-  questionDB = newQuestionDB
+  setQuestionDB(newQuestionDB)
 
   // rerender Pages
   renderHomePage()
   renderBookmarksPage()
+}
+
+// !!! Caution! Non Pure functions
+
+function setQuestionDB(newDB) {
+  questionDB = newDB
 }
