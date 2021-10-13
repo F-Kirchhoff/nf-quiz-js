@@ -2,8 +2,9 @@ const navBtnList = document.querySelectorAll('.js-nav-btn')
 const pageList = [...document.querySelectorAll('.js-content')]
 
 const cardContainer = document.querySelector('.js-card-container')
+const bookmarksContainer = document.querySelector('.js-bookmarks-container')
 
-const questionDB = [
+let questionDB = [
   {
     _id: 1,
     question:
@@ -11,6 +12,7 @@ const questionDB = [
     answer:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae illo expedita ipsum sit suscipit consequatur.',
     tags: ['lorem', 'ipsum', 'dolor', 'sit'],
+    saved: false,
   },
   {
     _id: 2,
@@ -19,6 +21,7 @@ const questionDB = [
     answer:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae illo expedita ipsum sit suscipit consequatur.',
     tags: ['lorem', 'ipsum', 'dolor', 'sit'],
+    saved: true,
   },
   {
     _id: 3,
@@ -27,6 +30,7 @@ const questionDB = [
     answer:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae illo expedita ipsum sit suscipit consequatur.',
     tags: ['lorem', 'ipsum', 'dolor', 'sit'],
+    saved: false,
   },
   {
     _id: 4,
@@ -35,21 +39,13 @@ const questionDB = [
     answer:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae illo expedita ipsum sit suscipit consequatur.',
     tags: ['lorem', 'ipsum', 'dolor', 'sit'],
+    saved: true,
   },
 ]
 
-userDB = [
-  {
-    username: 'John Doe',
-    bookmarks: [2, 4],
-  },
-]
-
-// create a question card for each question in the DB
-questionDB.forEach(question => {
-  const newQuestionCard = createQuestionCard(question)
-  cardContainer.appendChild(newQuestionCard)
-})
+//initial render of all pages
+renderHomePage()
+renderBookmarksPage()
 
 // Add functionality to nav buttons
 navBtnList.forEach(btn => {
@@ -94,7 +90,7 @@ function resetAllNavBtns() {
 
 // creates a question card as a dom element
 function createQuestionCard(questionObj) {
-  const { _id, question, answer, tags } = questionObj
+  const { _id, question, answer, tags, saved } = questionObj
 
   const newCard = document.createElement('li')
   newCard.classList.add('card', 'q-card')
@@ -122,7 +118,9 @@ function createQuestionCard(questionObj) {
     <ul class="tag-list">
     </ul>
     <button class="js-bookmark-btn bookmark">
-      <i class="js-bookmark bookmark__btn--empty far fa-bookmark"></i>
+      <i class="js-bookmark bookmark__btn--empty ${
+        saved ? 'fas' : 'far'
+      } fa-bookmark"></i>
     </button>
   `
   const tagList = newCard.querySelector('.tag-list')
@@ -148,8 +146,7 @@ function createQuestionCard(questionObj) {
 
   // add bookmark toggle
   bookmarkBtn.addEventListener('click', _ => {
-    bookmark.classList.toggle('far')
-    bookmark.classList.toggle('fas')
+    handleBookmarkClick(_id)
   })
 
   return newCard
@@ -162,4 +159,48 @@ function createTag(tag) {
   newTag.innerText = tag
 
   return newTag
+}
+
+function renderHomePage() {
+  //reset the homepage card container
+  cardContainer.innerHTML = ''
+
+  // create a question card for each question in the DB
+  questionDB.forEach(question => {
+    const newQuestionCard = createQuestionCard(question)
+    cardContainer.appendChild(newQuestionCard)
+  })
+}
+
+function renderBookmarksPage() {
+  //reset the bookmarks card container
+  bookmarksContainer.innerHTML = ''
+
+  //filter for only the saved questions
+  savedQuesitons = questionDB.filter(question => question.saved)
+
+  //add the filtered questions to the container
+  savedQuesitons.forEach(question => {
+    const newQuestionCard = createQuestionCard(question)
+    bookmarksContainer.appendChild(newQuestionCard)
+  })
+}
+
+function handleBookmarkClick(id) {
+  // find the respective Question and toggle the saved state
+  const newQuestionDB = questionDB.map(question => {
+    return question._id !== id
+      ? question
+      : {
+          ...question,
+          saved: !question.saved,
+        }
+  })
+
+  // update the DB
+  questionDB = newQuestionDB
+
+  // rerender Pages
+  renderHomePage()
+  renderBookmarksPage()
 }
