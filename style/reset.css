@@ -5,8 +5,10 @@ h3,
 dl,
 dd,
 a,
+button,
 dt {
   all: unset;
+  display: block;
 }
 
 * {

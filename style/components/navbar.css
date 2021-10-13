@@ -13,13 +13,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
   font-size: 1.5rem;
   background-color: var(--c-light);
   color: var(--c-primary);
-}
-
-.menu:not(menu:first-child) .menu__item {
   border-left: 1px solid rgb(206, 206, 206);
 }
 
