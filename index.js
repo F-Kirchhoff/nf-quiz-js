@@ -1,10 +1,7 @@
 const navBtnList = document.querySelectorAll('.js-nav-btn')
 const contentContainer = document.querySelector('.js-content')
 
-// const cardContainer = document.querySelector('.js-card-container')
-// const bookmarksContainer = document.querySelector('.js-bookmarks-container')
-
-//database of questions
+//model and database of questions
 let questionDB = [
   {
     _id: 1,
@@ -43,28 +40,21 @@ let questionDB = [
     saved: true,
   },
 ]
+let model = {
+  page: 'HOME',
+}
 
 // initializes pages as dom elements
 const cardContainer = makeCardContainer()
 const createForm = makeCreatePage()
 const profilePage = makeProfilePage()
-
+addNavBtnListeners()
 // Add functionality to nav buttons
-navBtnList.forEach(btn => {
-  btn.addEventListener('click', _ => {
-    // If the button is already active do nothing
-    if (btn.classList.contains('menu__item--active')) {
-      return
-    }
-
-    // Find the correct page content and display it
-    render(btn.value)
-  })
-})
 
 //initial render
-render('HOME')
+update(model, questionDB)
 
+// initial setup functions
 function makeCardContainer() {
   const cardContainer = document.createElement('ul')
   cardContainer.classList.add('card-container')
@@ -122,8 +112,8 @@ function makeCreatePage() {
     answer.value = ''
     tags.value = ''
 
-    setQuestionDB([newQuestionObj, ...questionDB])
-    renderHomePage()
+    const newDB = [newQuestionObj, ...questionDB]
+    update(model, newDB)
   })
 
   return createForm
@@ -161,16 +151,32 @@ function makeProfilePage() {
 
   return profilePage
 }
+function addNavBtnListeners() {
+  navBtnList.forEach(btn => {
+    btn.addEventListener('click', _ => {
+      // If the button is already active do nothing
+      if (btn.classList.contains('menu__item--active')) {
+        return
+      }
+      // Find the correct page content and update Screen
+      const newModel = {
+        ...model,
+        page: btn.value,
+      }
 
-function render(contentId) {
+      update(newModel, questionDB)
+    })
+  })
+}
+
+function render(model, questionDB) {
   //reset the content container
   contentContainer.innerHTML = ''
 
-  switch (contentId) {
+  switch (model.page) {
     case 'HOME': {
-      //create card container
-      const cardContainer = document.createElement('ul')
-      cardContainer.classList.add('card-container')
+      //reset card container
+      cardContainer.innerHTML = ''
 
       //add card container to content
       contentContainer.appendChild(cardContainer)
@@ -181,11 +187,13 @@ function render(contentId) {
         cardContainer.appendChild(newQuestionCard)
       })
 
-      updateNavBtns(contentId)
+      updateNavBtns(model.page)
       break
     }
+
     case 'BOOKMARKS': {
-      //create card container
+      //reset card container
+      cardContainer.innerHTML = ''
 
       //add card container to content
       contentContainer.appendChild(cardContainer)
@@ -199,38 +207,25 @@ function render(contentId) {
         cardContainer.appendChild(newQuestionCard)
       })
 
-      updateNavBtns(contentId)
+      updateNavBtns(model.page)
       break
     }
+
     case 'CREATE': {
       contentContainer.appendChild(createForm)
-      updateNavBtns(contentId)
+      updateNavBtns(model.page)
       break
     }
+
     case 'PROFILE': {
       contentContainer.appendChild(profilePage)
-      updateNavBtns(contentId)
+      updateNavBtns(model.page)
       break
     }
+
     default: {
     }
   }
-}
-
-function displayPageById(id) {
-  hideAllPages()
-  const activeContent = filterPagesById(id)[0]
-  activeContent.classList.remove('hidden')
-}
-
-function filterPagesById(id) {
-  return pageList.filter(element => element.id === id)
-}
-
-function hideAllPages() {
-  pageList.forEach(element => {
-    element.classList.add('hidden')
-  })
 }
 
 function updateNavBtns(contentId) {
@@ -317,22 +312,7 @@ function createTag(tag) {
   return newTag
 }
 
-function renderHomePage() {}
-
-function renderBookmarksPage() {
-  //reset the bookmarks card container
-  bookmarksContainer.innerHTML = ''
-
-  //filter for only the saved questions
-  savedQuesitons = questionDB.filter(question => question.saved)
-
-  //add the filtered questions to the container
-  savedQuesitons.forEach(question => {
-    const newQuestionCard = createQuestionCard(question)
-    bookmarksContainer.appendChild(newQuestionCard)
-  })
-}
-
+// handling model update and questionDB update when bookmark btn is clicked
 function handleBookmarkClick(id) {
   // find the respective Question and toggle the saved state
   const newQuestionDB = questionDB.map(question => {
@@ -345,14 +325,20 @@ function handleBookmarkClick(id) {
   })
 
   // update the DB
-  setQuestionDB(newQuestionDB)
-
-  // rerender Pages
-  renderHomePage()
-  renderBookmarksPage()
+  update(model, newQuestionDB)
 }
 
 // !!! Caution! Non Pure functions
+
+function update(newModel, newQuestionDB) {
+  setModel(newModel)
+  setQuestionDB(newQuestionDB)
+  render(model, questionDB)
+}
+
+function setModel(newModel) {
+  model = newModel
+}
 
 function setQuestionDB(newDB) {
   questionDB = newDB
