@@ -60,11 +60,8 @@ navBtnList.forEach(btn => {
     // Find the correct page content and display it
     displayPageById(btn.value)
 
-    // reset all Buttons
-    resetAllNavBtns()
-
-    // Apply active styling to button
-    btn.classList.add('menu__item--active')
+    // restyle nav btns
+    updateNavBtns(btn)
   })
 })
 
@@ -107,10 +104,14 @@ function hideAllPages() {
   })
 }
 
-function resetAllNavBtns() {
+function updateNavBtns(activeBtn) {
+  // reset all buttons
   navBtnList.forEach(btn => {
     btn.classList.remove('menu__item--active')
   })
+
+  // Apply active styling to button
+  activeBtn.classList.add('menu__item--active')
 }
 
 // creates a question card as a dom element
