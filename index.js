@@ -1,11 +1,10 @@
 const navBtnList = document.querySelectorAll('.js-nav-btn')
-const pageList = [...document.querySelectorAll('.js-content')]
+const contentContainer = document.querySelector('.js-content')
 
-const cardContainer = document.querySelector('.js-card-container')
-const bookmarksContainer = document.querySelector('.js-bookmarks-container')
+// const cardContainer = document.querySelector('.js-card-container')
+// const bookmarksContainer = document.querySelector('.js-bookmarks-container')
 
-const createForm = document.querySelector('[data-js=create-form]')
-
+//database of questions
 let questionDB = [
   {
     _id: 1,
@@ -45,9 +44,10 @@ let questionDB = [
   },
 ]
 
-//initial render of all pages
-renderHomePage()
-renderBookmarksPage()
+// initializes pages as dom elements
+const cardContainer = makeCardContainer()
+const createForm = makeCreatePage()
+const profilePage = makeProfilePage()
 
 // Add functionality to nav buttons
 navBtnList.forEach(btn => {
@@ -58,35 +58,164 @@ navBtnList.forEach(btn => {
     }
 
     // Find the correct page content and display it
-    displayPageById(btn.value)
-
-    // restyle nav btns
-    updateNavBtns(btn)
+    render(btn.value)
   })
 })
 
-// add functionality of the create page
-createForm.addEventListener('submit', event => {
-  event.preventDefault()
-  const { question, answer, tags } = createForm.elements
+//initial render
+render('HOME')
 
-  const tagList = tags.value.split(',')
+function makeCardContainer() {
+  const cardContainer = document.createElement('ul')
+  cardContainer.classList.add('card-container')
+  return cardContainer
+}
+function makeCreatePage() {
+  const createForm = document.createElement('form')
+  createForm.classList.add('submit-form', 'card')
 
-  const newQuestionObj = {
-    _id: new Date().getTime(),
-    question: question.value,
-    answer: answer.value,
-    tags: tagList,
-    saved: false,
+  createForm.innerHTML = `
+    <label class="text-lg text-primary" for="question-field"
+    >Question</label
+    >
+    <textarea
+      class="submit-form__input submit-form__input--question"
+      name="question"
+      id="question-field"
+      placeholder="Write your question here..."
+    ></textarea>
+    <label class="text-lg text-secondary" for="answer-field">Answer</label>
+    <textarea
+      class="submit-form__input submit-form__input--answer"
+      name="answer"DE02 2004 0000 0150 7003 00
+      id="answer-field"
+      placeholder="Write your answer here..."
+    ></textarea>
+    <label class="text-lg text-dark" for="tags-field">Tags</label>
+    <input
+      type="text"
+      class="submit-form__input submit-form__input--tags"
+      name="tags"
+      id="tags-field"
+      placeholder="tags..."
+    />
+    <button class="submit-form__btn bg-gradient-secondary">
+      Submit Question
+    </button>
+  `
+
+  createForm.addEventListener('submit', event => {
+    event.preventDefault()
+    const { question, answer, tags } = createForm.elements
+
+    const tagList = tags.value.split(',')
+
+    const newQuestionObj = {
+      _id: new Date().getTime(),
+      question: question.value,
+      answer: answer.value,
+      tags: tagList,
+      saved: false,
+    }
+
+    question.value = ''
+    answer.value = ''
+    tags.value = ''
+
+    setQuestionDB([newQuestionObj, ...questionDB])
+    renderHomePage()
+  })
+
+  return createForm
+}
+function makeProfilePage() {
+  const profilePage = document.createElement('div')
+  profilePage.classList.add('card', 'profile-card')
+
+  profilePage.innerHTML = `
+    <img
+    class="profile-card__img"
+    src="https://source.unsplash.com/random/300x300?portrait"
+    alt=""
+    height="200"
+    width="200"
+    />
+    <h2 class="profile-card__name">John Doe</h2>
+    <p class="profile-card__description">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt
+      adipisci laborum voluptatum, quo ipsa voluptates temporibus ullam
+      mollitia cupiditate illum odit at velit, nobis suscipit nam!
+      Praesentium, accusamus sed maiores veritatis nulla consequatur,
+      repellendus ex, recusandae expedita quod facere nisi.
+    </p>
+    <h3 class="profile-card__skill-header">Skills</h3>
+    <ul class="tag-list">
+      <li class="tag-list__item">HTML</li>
+      <li class="tag-list__item">CSS</li>
+      <li class="tag-list__item">React</li>
+      <li class="tag-list__item">Design</li>
+    </ul>
+    <a class="profile-card__logout-btn" href="#tologoutpage">logout</a>
+    </div>
+  `
+
+  return profilePage
+}
+
+function render(contentId) {
+  //reset the content container
+  contentContainer.innerHTML = ''
+
+  switch (contentId) {
+    case 'HOME': {
+      //create card container
+      const cardContainer = document.createElement('ul')
+      cardContainer.classList.add('card-container')
+
+      //add card container to content
+      contentContainer.appendChild(cardContainer)
+
+      // create a question card for each question in the DB
+      questionDB.forEach(question => {
+        const newQuestionCard = createQuestionCard(question)
+        cardContainer.appendChild(newQuestionCard)
+      })
+
+      updateNavBtns(contentId)
+      break
+    }
+    case 'BOOKMARKS': {
+      //create card container
+
+      //add card container to content
+      contentContainer.appendChild(cardContainer)
+
+      // filter for only saved questions
+      const savedQuesitons = questionDB.filter(question => question.saved)
+
+      // create a question card for each question in the DB
+      savedQuesitons.forEach(question => {
+        const newQuestionCard = createQuestionCard(question)
+        cardContainer.appendChild(newQuestionCard)
+      })
+
+      updateNavBtns(contentId)
+      break
+    }
+    case 'CREATE': {
+      contentContainer.appendChild(createForm)
+      updateNavBtns(contentId)
+      break
+    }
+    case 'PROFILE': {
+      contentContainer.appendChild(profilePage)
+      updateNavBtns(contentId)
+      break
+    }
+    default: {
+    }
   }
-
-  question.value = ''
-  answer.value = ''
-  tags.value = ''
-
-  setQuestionDB([newQuestionObj, ...questionDB])
-  renderHomePage()
-})
+}
 
 function displayPageById(id) {
   hideAllPages()
@@ -104,14 +233,15 @@ function hideAllPages() {
   })
 }
 
-function updateNavBtns(activeBtn) {
+function updateNavBtns(contentId) {
   // reset all buttons
   navBtnList.forEach(btn => {
-    btn.classList.remove('menu__item--active')
+    if (btn.value === contentId) {
+      btn.classList.add('menu__item--active')
+    } else {
+      btn.classList.remove('menu__item--active')
+    }
   })
-
-  // Apply active styling to button
-  activeBtn.classList.add('menu__item--active')
 }
 
 // creates a question card as a dom element
@@ -187,16 +317,7 @@ function createTag(tag) {
   return newTag
 }
 
-function renderHomePage() {
-  //reset the homepage card container
-  cardContainer.innerHTML = ''
-
-  // create a question card for each question in the DB
-  questionDB.forEach(question => {
-    const newQuestionCard = createQuestionCard(question)
-    cardContainer.appendChild(newQuestionCard)
-  })
-}
+function renderHomePage() {}
 
 function renderBookmarksPage() {
   //reset the bookmarks card container
