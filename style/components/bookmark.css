@@ -7,25 +7,16 @@
   cursor: pointer;
 }
 
-.bookmark__btn .bookmark__btn--filled {
-  display: none;
-  cursor: pointer;
-}
-
-.bookmark__btn .bookmark__btn--empty {
-  display: block;
-  cursor: pointer;
-}
-
-.bookmark
-  input[type='checkbox']:checked
-  ~ .bookmark__btn
-  .bookmark__btn--empty {
-  display: none;
-}
-.bookmark
-  input[type='checkbox']:checked
-  ~ .bookmark__btn
-  .bookmark__btn--filled {
-  display: block;
+.bookmark > i.fas::before {
+  background: linear-gradient(
+    180deg,
+    var(--c-secondary-start) 0%,
+    var(--c-secondary) 30%,
+    var(--c-secondary-end) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 5px rgba(50, 50, 93, 0.25))
+    drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
 }
