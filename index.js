@@ -48,19 +48,25 @@ let model = {
 const cardContainer = makeCardContainer()
 const createForm = makeCreatePage()
 const profilePage = makeProfilePage()
-addNavBtnListeners()
 // Add functionality to nav buttons
+addNavBtnListeners()
 
 //initial render
 update(model, questionDB)
 
+// FUNCTION AREA
+
 // initial setup functions
 function makeCardContainer() {
+  // creates a div in the dom to use later for grid display of the cards
+
   const cardContainer = document.createElement('ul')
   cardContainer.classList.add('card-container')
   return cardContainer
 }
 function makeCreatePage() {
+  // creates a form in the dom for creating new question cards
+
   const createForm = document.createElement('form')
   createForm.classList.add('submit-form', 'card')
 
@@ -119,6 +125,8 @@ function makeCreatePage() {
   return createForm
 }
 function makeProfilePage() {
+  // creates a profile card for display on the profile page
+
   const profilePage = document.createElement('div')
   profilePage.classList.add('card', 'profile-card')
 
@@ -152,6 +160,8 @@ function makeProfilePage() {
   return profilePage
 }
 function addNavBtnListeners() {
+  // uses the queried btn elements and adds a event listener to them, which trigger a rerender of the main content
+
   navBtnList.forEach(btn => {
     btn.addEventListener('click', _ => {
       // If the button is already active do nothing
@@ -170,6 +180,8 @@ function addNavBtnListeners() {
 }
 
 function render(model, questionDB) {
+  // a function that renders the main page depending on the model and questionDB different model.page entries result in display of different content rendered to the app
+
   //reset the content container
   contentContainer.innerHTML = ''
 
@@ -228,10 +240,10 @@ function render(model, questionDB) {
   }
 }
 
-function updateNavBtns(contentId) {
-  // reset all buttons
+function updateNavBtns(model) {
+  // updates the styling of the nav buttons
   navBtnList.forEach(btn => {
-    if (btn.value === contentId) {
+    if (btn.value === model.page) {
       btn.classList.add('menu__item--active')
     } else {
       btn.classList.remove('menu__item--active')
@@ -239,8 +251,8 @@ function updateNavBtns(contentId) {
   })
 }
 
-// creates a question card as a dom element
 function createQuestionCard(questionObj) {
+  // creates a question card in the dom, adds functionality to it and fills in the content dynamically
   const { _id, question, answer, tags, saved } = questionObj
 
   const newCard = document.createElement('li')
@@ -303,8 +315,8 @@ function createQuestionCard(questionObj) {
   return newCard
 }
 
-// creates a tag for tag-list as a dom element
 function createTag(tag) {
+  // creates a tag element for the tag list
   const newTag = document.createElement('li')
   newTag.classList.add('tag-list__item')
   newTag.innerText = tag
@@ -312,8 +324,9 @@ function createTag(tag) {
   return newTag
 }
 
-// handling model update and questionDB update when bookmark btn is clicked
 function handleBookmarkClick(id) {
+  // handles the model update and questionDB update when bookmark btn is clicked
+
   // find the respective Question and toggle the saved state
   const newQuestionDB = questionDB.map(question => {
     return question._id !== id
@@ -331,15 +344,21 @@ function handleBookmarkClick(id) {
 // !!! Caution! Non Pure functions
 
 function update(newModel, newQuestionDB) {
+  // central function that triggers an update of the model and database and rerenders the content afterwards
+
   setModel(newModel)
   setQuestionDB(newQuestionDB)
   render(model, questionDB)
 }
 
 function setModel(newModel) {
+  // pseudo hook that resets the value of model
+
   model = newModel
 }
 
 function setQuestionDB(newDB) {
+  // pseudo hook that resets the value of QuestionDB
+
   questionDB = newDB
 }
