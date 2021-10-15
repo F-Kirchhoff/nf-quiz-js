@@ -11,6 +11,7 @@
       integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
       crossorigin="anonymous"
     />
+    <script defer type="module" src="./js-components/index.js"></script>
     <title>Quizzzle</title>
   </head>
   <body>
@@ -19,46 +20,6 @@
     </header>
     <!-- HOME-CONTENT  -->
     <main class="js-content xcentered wv-full"></main>
-    <nav class="zz-top">
-      <dl class="menu">
-        <button
-          class="js-nav-btn menu__item menu__item--active"
-          href="index.html"
-          value="HOME"
-        >
-          <dt class="sr-only">home</dt>
-          <dd class="">
-            <i class="fas fa-home"></i>
-          </dd>
-        </button>
-        <button
-          class="js-nav-btn menu__item"
-          href="bookmarks.html"
-          value="BOOKMARKS"
-        >
-          <dt class="sr-only">bookmarks</dt>
-          <dd>
-            <i class="fas fa-bookmark"></i>
-          </dd>
-        </button>
-        <button class="js-nav-btn menu__item" href="create.html" value="CREATE">
-          <dt class="sr-only">create</dt>
-          <dd>
-            <i class="fas fa-plus"></i>
-          </dd>
-        </button>
-        <button
-          class="js-nav-btn menu__item"
-          href="profile.html"
-          value="PROFILE"
-        >
-          <dt class="sr-only">profile</dt>
-          <dd>
-            <i class="fas fa-user-circle"></i>
-          </dd>
-        </button>
-      </dl>
-    </nav>
-    <script src="index.js"></script>
+    <nav class="js-nav zz-top"></nav>
   </body>
 </html>
