@@ -1,5 +1,7 @@
-export function createElement(type, classes, content) {
+export function createElement(props) {
+  const { id, classes, type, content } = props
   const newElement = document.createElement(type)
+  if (id) newElement.id = id
   classes.forEach(className => {
     newElement.classList.add(className)
   })

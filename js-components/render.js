@@ -76,6 +76,10 @@ function render(model, questionDB, update) {
     }
 
     default: {
+      const cardContainer = makeCardContainer()
+
+      //add card container to content
+      contentContainer.appendChild(cardContainer)
     }
   }
 }

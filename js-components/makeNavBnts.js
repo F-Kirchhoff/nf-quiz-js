@@ -42,7 +42,7 @@ function makeNavBtns(model, questionDB, update) {
   const navBtnList = menu.querySelectorAll('.js-nav-btn')
 
   navBtnList.forEach(btn => {
-    btn.addEventListener('click', _ => {
+    btn.addEventListener('click', () => {
       // If the button is already active do nothing
       if (btn.classList.contains('menu__item--active')) {
         return

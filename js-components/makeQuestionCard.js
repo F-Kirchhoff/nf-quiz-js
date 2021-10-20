@@ -32,14 +32,18 @@ function makeQuestionCard(model, questionDB, update, questionObj) {
     <button class="js-bookmark-btn bookmark">
     <i class="js-bookmark bookmark__btn--empty ${
       saved ? 'fas' : 'far'
-    } fa-bookmark"></i>
+    } fa-bookmark">
+    </i>
     </button>
     `
   const props = {
+    type: 'li',
     id: `questioncard_${_id}`,
+    classes: ['card', 'q-card'],
+    content: cardContent,
   }
 
-  const newCard = createElement('li', ['card', 'q-card'], cardContent)
+  const newCard = createElement(props)
 
   const tagList = newCard.querySelector('.tag-list')
   const answerBtn = newCard.querySelector('.js-answer-btn')
@@ -47,7 +51,6 @@ function makeQuestionCard(model, questionDB, update, questionObj) {
   const btnTxtShow = newCard.querySelector('.js-show-text')
   const btnTxtHide = newCard.querySelector('.js-hide-text')
   const answerContainer = newCard.querySelector('.js-answer-container')
-  const bookmark = newCard.querySelector('.js-bookmark')
 
   // populate tag list
   tags.forEach(tag => {
@@ -56,14 +59,14 @@ function makeQuestionCard(model, questionDB, update, questionObj) {
   })
 
   // add answer toggle
-  answerBtn.addEventListener('click', _ => {
+  answerBtn.addEventListener('click', () => {
     btnTxtHide.classList.toggle('hidden')
     btnTxtShow.classList.toggle('hidden')
     answerContainer.classList.toggle('hidden')
   })
 
   // add bookmark toggle
-  bookmarkBtn.addEventListener('click', _ => {
+  bookmarkBtn.addEventListener('click', () => {
     handleBookmarkClick(model, questionDB, update, _id)
   })
 
