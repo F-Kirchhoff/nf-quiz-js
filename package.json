@@ -5,7 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm run html:check && npm run css:check && npm run prettier:check",
+    "test": "npm run html:check && npm run css:check && npm run prettier:check && npm run js:check",
+    "js:check": "npx eslint .",
+    "js:fix": "npx eslint . --fix",
     "html:check": "npx htmlhint **/*.html",
     "css:check": "npx stylelint **/*.css",
     "css:fix": "npx stylelint **/*.css --fix",
@@ -15,11 +17,14 @@
   },
   "lint-staged": {
     "**/*.css": "npm run css:fix",
+    "**/*.js": "npm run js:fix",
     "**/*": "npm run prettier:fix"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "8.0.1",
+    "eslint-config-prettier": "8.3.0",
     "htmlhint": "^0.15.2",
     "husky": "^7.0.2",
     "lint-staged": "^11.2.3",
