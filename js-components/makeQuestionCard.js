@@ -1,14 +1,14 @@
 import makeTag from './makeTag.js'
+import createElement from './utility.js'
 
 function makeQuestionCard(model, questionDB, update, questionObj) {
   // creates a question card in the dom, adds functionality to it and fills in the content dynamically
   const { _id, question, answer, tags, saved } = questionObj
 
-  const newCard = document.createElement('li')
   newCard.classList.add('card', 'q-card')
   newCard.id = `questioncard_${_id}`
 
-  newCard.innerHTML = `      
+  const cardContent = `      
     <div class="q-card__q-container">
       <h2 class="q-card__title text-primary">Question</h2>
       <p class="q-card__q-text">
@@ -30,11 +30,17 @@ function makeQuestionCard(model, questionDB, update, questionObj) {
     <ul class="tag-list">
     </ul>
     <button class="js-bookmark-btn bookmark">
-      <i class="js-bookmark bookmark__btn--empty ${
-        saved ? 'fas' : 'far'
-      } fa-bookmark"></i>
+    <i class="js-bookmark bookmark__btn--empty ${
+      saved ? 'fas' : 'far'
+    } fa-bookmark"></i>
     </button>
-  `
+    `
+  const props = {
+    id: `questioncard_${_id}`,
+  }
+
+  const newCard = createElement('li', ['card', 'q-card'], cardContent)
+
   const tagList = newCard.querySelector('.tag-list')
   const answerBtn = newCard.querySelector('.js-answer-btn')
   const bookmarkBtn = newCard.querySelector('.js-bookmark-btn')
