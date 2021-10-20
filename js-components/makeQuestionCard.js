@@ -1,5 +1,5 @@
 import makeTag from './makeTag.js'
-import { createElement } from './utility.js'
+import { createElement, getElement } from './utility.js'
 
 function makeQuestionCard(model, questionDB, update, questionObj) {
   // creates a question card in the dom, adds functionality to it and fills in the content dynamically
@@ -12,24 +12,22 @@ function makeQuestionCard(model, questionDB, update, questionObj) {
         ${question}
       </p>
     </div>
-    <button class="js-answer-btn q-card__btn bg-gradient-secondary">
-      <span class="js-show-text q-card__btn-text"> show answer </span>
-      <span class="js-hide-text q-card__btn-text hidden">
+    <button data-js="answer-btn" class="q-card__btn bg-gradient-secondary">
+      <span data-js="show-text" class="q-card__btn-text"> show answer </span>
+      <span data-js="hide-text" class="q-card__btn-text hidden">
         hide answer
       </span>
     </button>
-    <div class="js-answer-container q-card__answer-container hidden">
+    <div data-js="answer-container" class="q-card__answer-container hidden">
       <h2 class="q-card__title text-secondary">Answer</h2>
       <p class="q-card__a-text bg-gradient-secondary">
         ${answer}
       </p>
     </div>
-    <ul class="tag-list">
+    <ul data-js="tag-list" class="tag-list">
     </ul>
-    <button class="js-bookmark-btn bookmark">
-    <i class="js-bookmark bookmark__btn--empty ${
-      saved ? 'fas' : 'far'
-    } fa-bookmark">
+    <button data-js="bookmark-btn" class="bookmark">
+    <i class="${saved ? 'fas' : 'far'} fa-bookmark">
     </i>
     </button>
     `
@@ -42,12 +40,12 @@ function makeQuestionCard(model, questionDB, update, questionObj) {
 
   const newCard = createElement(props)
 
-  const tagList = newCard.querySelector('.tag-list')
-  const answerBtn = newCard.querySelector('.js-answer-btn')
-  const bookmarkBtn = newCard.querySelector('.js-bookmark-btn')
-  const btnTxtShow = newCard.querySelector('.js-show-text')
-  const btnTxtHide = newCard.querySelector('.js-hide-text')
-  const answerContainer = newCard.querySelector('.js-answer-container')
+  const tagList = getElement('tag-list', newCard)
+  const answerBtn = getElement('answer-btn', newCard)
+  const bookmarkBtn = getElement('bookmark-btn', newCard)
+  const btnTxtShow = getElement('show-text', newCard)
+  const btnTxtHide = getElement('hide-text', newCard)
+  const answerContainer = getElement('answer-container', newCard)
 
   // populate tag list
   tags.forEach(tag => {
