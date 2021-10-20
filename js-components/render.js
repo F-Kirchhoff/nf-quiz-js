@@ -5,18 +5,18 @@ import makeCardContainer from './makeCardContainer.js'
 import makeNavBtns from './makeNavBnts.js'
 
 function render(model, questionDB, update) {
-  // a function that renders the main page depending on the model and questionDB different model.page entries result in display of different content rendered to the app
+  // a function that renders the main page depending on the model and questionDB
+  //different model.page entries result in display of different content rendered to the app
 
   // query the two starting points for content and navbar
   const contentContainer = document.querySelector('.js-content')
   contentContainer.innerHTML = ''
   const navbar = document.querySelector('.js-nav')
   navbar.innerHTML = ''
+
   //create navbar buttons and add them to the page
   const menu = makeNavBtns(model, questionDB, update)
   navbar.appendChild(menu)
-
-  //reset the content container
 
   switch (model.page) {
     case 'HOME': {
