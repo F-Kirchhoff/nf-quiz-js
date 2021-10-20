@@ -5,17 +5,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm run html:check && npm run css:check && npm run prettier:check",
+    "test": "npm run html:check && npm run css:check && npm run prettier:check &&npm run js:check",
     "html:check": "npx htmlhint **/*.html",
     "css:check": "npx stylelint **/*.css",
     "css:fix": "npx stylelint **/*.css --fix",
     "prettier:check": "npx prettier --check .",
     "prettier:fix": "npx prettier --ignore-unknown --write .",
+    "js:check": "npx eslint .",
+    "js:fix": "npx eslint --fix .",
     "prepare": "husky install"
   },
   "lint-staged": {
     "**/*.css": "npm run css:fix",
-    "**/*": "npm run prettier:fix"
+    "**/*": "npm run prettier:fix",
+    "**/*.js": "npm run js:fix"
   },
   "author": "",
   "license": "ISC",
