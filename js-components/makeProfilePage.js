@@ -1,10 +1,9 @@
+import { createElement } from './utility.js'
+
 function makeProfilePage() {
   // creates a profile card for display on the profile page
 
-  const profilePage = document.createElement('div')
-  profilePage.classList.add('card', 'profile-card')
-
-  profilePage.innerHTML = `
+  const profileContent = `
     <img
     class="profile-card__img"
     src="https://source.unsplash.com/random/300x300?portrait"
@@ -30,6 +29,12 @@ function makeProfilePage() {
     <a class="profile-card__logout-btn" href="#tologoutpage">logout</a>
     </div>
   `
+  const props = {
+    type: 'div',
+    classes: ['card', 'profile-card'],
+    content: profileContent,
+  }
+  const profilePage = createElement(props)
 
   return profilePage
 }

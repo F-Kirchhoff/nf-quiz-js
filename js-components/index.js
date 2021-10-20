@@ -7,5 +7,3 @@ import { model, questionDB } from './model.js'
 
 //initial render
 render(model, questionDB, update)
-
-// FUNCTION AREA

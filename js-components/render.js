@@ -1,17 +1,17 @@
 import makeQuestionCard from './makeQuestionCard.js'
 import makeCreateForm from './makeCreateForm.js'
 import makeProfilePage from './makeProfilePage.js'
-import makeCardContainer from './makeCardContainer.js'
 import makeNavBtns from './makeNavBnts.js'
+import { createElement, getElement } from './utility.js'
 
 function render(model, questionDB, update) {
   // a function that renders the main page depending on the model and questionDB
   //different model.page entries result in display of different content rendered to the app
 
   // query the two starting points for content and navbar
-  const contentContainer = document.querySelector('.js-content')
-  contentContainer.innerHTML = ''
-  const navbar = document.querySelector('.js-nav')
+  const root = getElement('root')
+  root.innerHTML = ''
+  const navbar = getElement('nav')
   navbar.innerHTML = ''
 
   //create navbar buttons and add them to the page
@@ -21,10 +21,15 @@ function render(model, questionDB, update) {
   switch (model.page) {
     case 'HOME': {
       //reset card container
-      const cardContainer = makeCardContainer()
+      const cardContainerProps = {
+        type: 'ul',
+        classes: ['card-container'],
+        content: '',
+      }
+      const cardContainer = createElement(cardContainerProps)
 
       //add card container to content
-      contentContainer.appendChild(cardContainer)
+      root.appendChild(cardContainer)
 
       // create a question card for each question in the DB
       questionDB.forEach(question => {
@@ -41,10 +46,15 @@ function render(model, questionDB, update) {
 
     case 'BOOKMARKS': {
       //reset card container
-      const cardContainer = makeCardContainer()
+      const cardContainerProps = {
+        type: 'ul',
+        classes: ['card-container'],
+        content: '',
+      }
+      const cardContainer = createElement(cardContainerProps)
 
       //add card container to content
-      contentContainer.appendChild(cardContainer)
+      root.appendChild(cardContainer)
 
       // filter for only saved questions
       const savedQuesitons = questionDB.filter(question => question.saved)
@@ -65,21 +75,24 @@ function render(model, questionDB, update) {
 
     case 'CREATE': {
       const createForm = makeCreateForm(model, questionDB, update)
-      contentContainer.appendChild(createForm)
+      root.appendChild(createForm)
       break
     }
 
     case 'PROFILE': {
       const profilePage = makeProfilePage(model, questionDB, update)
-      contentContainer.appendChild(profilePage)
+      root.appendChild(profilePage)
       break
     }
 
     default: {
-      const cardContainer = makeCardContainer()
+      const placeholder = createElement({
+        type: 'div',
+        content: 'Something went wrong',
+      })
 
       //add card container to content
-      contentContainer.appendChild(cardContainer)
+      root.appendChild(placeholder)
     }
   }
 }

@@ -1,10 +1,9 @@
+import { createElement } from './utility.js'
+
 function makeCreateForm(model, questionDB, update) {
   // creates a form in the dom for creating new question cards
 
-  const createForm = document.createElement('form')
-  createForm.classList.add('submit-form', 'card')
-
-  createForm.innerHTML = `
+  const createFromContent = `
     <label class="text-lg text-primary" for="question-field"
     >Question</label
     >
@@ -33,6 +32,13 @@ function makeCreateForm(model, questionDB, update) {
       Submit Question
     </button>
   `
+
+  const props = {
+    type: 'form',
+    classes: ['submit-form', 'card'],
+    content: createFromContent,
+  }
+  const createForm = createElement(props)
 
   createForm.addEventListener('submit', event => {
     event.preventDefault()

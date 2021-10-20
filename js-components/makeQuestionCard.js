@@ -42,8 +42,6 @@ function makeQuestionCard(model, questionDB, update, questionObj) {
 
   const newCard = createElement(props)
 
-  console.log(newCard)
-
   const tagList = newCard.querySelector('.tag-list')
   const answerBtn = newCard.querySelector('.js-answer-btn')
   const bookmarkBtn = newCard.querySelector('.js-bookmark-btn')

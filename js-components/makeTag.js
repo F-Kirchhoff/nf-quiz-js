@@ -1,8 +1,13 @@
+import { createElement } from './utility.js'
+
 function makeTag(tag) {
   // creates a tag element for the tag list
-  const newTag = document.createElement('li')
-  newTag.classList.add('tag-list__item')
-  newTag.innerText = tag
+  const props = {
+    type: 'li',
+    classes: ['tag-list__item'],
+    content: tag,
+  }
+  const newTag = createElement(props)
 
   return newTag
 }

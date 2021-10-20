@@ -1,8 +1,8 @@
-export let model = {
+export const model = {
   page: 'HOME',
 }
 
-export let questionDB = [
+export const questionDB = [
   {
     _id: 1,
     question:
@@ -40,14 +40,3 @@ export let questionDB = [
     saved: true,
   },
 ]
-
-export function setModel(newModel) {
-  // pseudo hook that resets the value of model
-  model = newModel
-}
-
-export function setQuestionDB(newDB) {
-  // pseudo hook that resets the value of QuestionDB
-
-  questionDB = newDB
-}

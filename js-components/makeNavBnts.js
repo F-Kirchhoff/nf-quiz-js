@@ -1,9 +1,10 @@
+import { createElement, getAllElements } from './utility.js'
+
 function makeNavBtns(model, questionDB, update) {
-  const menu = document.createElement('dl')
-  menu.classList.add('menu')
-  menu.innerHTML = `
+  const menuContent = `
         <button
-          class="js-nav-btn menu__item"
+          data-js="nav-btn"
+          class="menu__item"
           href="index.html"
           value="HOME"
         >
@@ -13,7 +14,8 @@ function makeNavBtns(model, questionDB, update) {
           </dd>
         </button>
         <button
-          class="js-nav-btn menu__item"
+          data-js="nav-btn"
+          class="menu__item"
           href="bookmarks.html"
           value="BOOKMARKS"
         >
@@ -22,14 +24,17 @@ function makeNavBtns(model, questionDB, update) {
             <i class="fas fa-bookmark"></i>
           </dd>
         </button>
-        <button class="js-nav-btn menu__item" href="create.html" value="CREATE">
+        <button
+          data-js="nav-btn"
+          class="menu__item" href="create.html" value="CREATE">
           <dt class="sr-only">create</dt>
           <dd>
             <i class="fas fa-plus"></i>
           </dd>
         </button>
         <button
-          class="js-nav-btn menu__item"
+          data-js="nav-btn"
+          class="menu__item"
           href="profile.html"
           value="PROFILE"
         >
@@ -39,7 +44,14 @@ function makeNavBtns(model, questionDB, update) {
           </dd>
         </button>
   `
-  const navBtnList = menu.querySelectorAll('.js-nav-btn')
+  const props = {
+    type: 'dl',
+    classes: ['menu'],
+    content: menuContent,
+  }
+  const menu = createElement(props)
+
+  const navBtnList = getAllElements('nav-btn', menu)
 
   navBtnList.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -57,6 +69,7 @@ function makeNavBtns(model, questionDB, update) {
     })
   })
 
+  // Style the current active button
   navBtnList.forEach(btn => {
     if (btn.value === model.page) {
       btn.classList.add('menu__item--active')
